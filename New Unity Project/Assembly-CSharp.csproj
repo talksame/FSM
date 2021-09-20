@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\IdleState.cs" />
     <Compile Include="Assets\Script\PlayerCharacter.cs" />
+    <Compile Include="Assets\Script\FieldOfView.cs" />
     <Compile Include="Assets\Script\AttackState.cs" />
     <Compile Include="Assets\Script\TopDownCamera2.cs" />
     <Compile Include="Assets\Script\RigidBodyScript.cs" />
@@ -68,7 +69,7 @@
     <Compile Include="Assets\IdleRandomStateMachine.cs" />
     <Compile Include="Assets\Script\ControllerCharacter.cs" />
     <Compile Include="Assets\Script\StateMachine.cs" />
-    <Compile Include="Assets\Script\FieldOfView.cs" />
+    <Compile Include="Assets\Script\FieldOfViewEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

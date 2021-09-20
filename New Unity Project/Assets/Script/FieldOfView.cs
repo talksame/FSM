@@ -12,7 +12,10 @@ public class FieldOfView : MonoBehaviour
     public LayerMask obstalceMask;
 
 
-    private List<Transform> visibleTragets  = new List<Transform>();
+    private List<Transform> visibleTargets  = new List<Transform>();
+
+    // 프로퍼티 추가
+    public List<Transform> VisibleTargets => visibleTargets;
     
     private Transform nearestTarget;
     private float distanceToTarget = 0.0f;
@@ -32,7 +35,7 @@ public class FieldOfView : MonoBehaviour
     {
         distanceToTarget = 0.0f;
         nearestTarget = null;
-        visibleTragets.Clear();
+        visibleTargets.Clear();
 
 
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRaidus, targetMask);
@@ -48,7 +51,7 @@ public class FieldOfView : MonoBehaviour
                 // 현재 위치에서 시야갹으로 레이저를 쏘았을 때, 장애물의 여부를 파악한다.
                 if ( !Physics.Raycast(transform.position, dirtoTarget, dstToTarget, obstalceMask))
                 {
-                    visibleTragets.Add(target);
+                    visibleTargets.Add(target);
                     if( nearestTarget == null || (distanceToTarget > dstToTarget))
                     {
                         nearestTarget = target;
@@ -59,5 +62,19 @@ public class FieldOfView : MonoBehaviour
             }
         }
 
+    }
+
+
+    public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
+    {
+        if (!angleIsGlobal)
+        {
+            angleInDegrees += transform.eulerAngles.y;
+        }
+
+        return new Vector3(
+            Mathf.Sin(angleInDegrees * Mathf.Deg2Rad),
+            0,
+            Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
 }

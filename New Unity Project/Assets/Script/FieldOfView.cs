@@ -18,8 +18,11 @@ public class FieldOfView : MonoBehaviour
     public List<Transform> VisibleTargets => visibleTargets;
     
     private Transform nearestTarget;
+    public Transform NeartestTarget => nearestTarget;
     private float distanceToTarget = 0.0f;
     // Start is called before the first frame update
+
+    public float delay = 0.2f;
     void Start()
     {
         
@@ -28,7 +31,17 @@ public class FieldOfView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FindVisibleTargets();
+        //과부화 방지를 위한 Delay
+        StartCoroutine("FindTargetsWithDelay", delay);
+    }
+
+    IEnumerator FindTargetsWithDelay(float delay)
+    {
+        while ( true)
+        {
+            yield return new WaitForSeconds(delay);
+            FindVisibleTargets();
+        }
     }
 
     void FindVisibleTargets()

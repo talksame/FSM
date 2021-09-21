@@ -11,12 +11,17 @@ namespace FastCampus.Characters
         #region Variables
         protected StateMachine<EnemyController> stateMachine;
         //시야거리 > 공격거리 가 기본적인 ㅇㅇ
-        public LayerMask targetMask;
-        public float viewRadius;
+
+        public StateMachine<EnemyController> StateMachine => stateMachine;
+
+
+        private FieldOfView fov;
+        //public LayerMask targetMask;
+        //public float viewRadius;
         public float attackRange;
 
 
-        public Transform target;
+        public Transform Target => fov.NeartestTarget;
         #endregion Variables
 
         #region Unity Methods
@@ -25,6 +30,9 @@ namespace FastCampus.Characters
             stateMachine = new StateMachine<EnemyController>(this, new IdleState());
             stateMachine.AddState(new MoveState());
             stateMachine.AddState(new AttackState());
+
+
+            fov = GetComponent<FieldOfView>();
         }
 
         private void Update()
@@ -36,11 +44,11 @@ namespace FastCampus.Characters
         {
             get
             {
-                if (!target)
+                if (!Target)
                 {
                     return false;
                 }
-                float distance = Vector3.Distance(transform.position, target.position);
+                float distance = Vector3.Distance(transform.position, Target.position);
                 return (distance <= attackRange);
             }
         }
@@ -48,27 +56,28 @@ namespace FastCampus.Characters
         #region Other Methods
         public Transform SearchEnemy()
         {
-            target = null;
-            // 물리적인 구체형태에서 적이 있는가?
-            Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+            return Target;
+            //Target = null;
+            //// 물리적인 구체형태에서 적이 있는가?
+            //Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
 
-            if (targetInViewRadius.Length > 0)
-            {
-                target = targetInViewRadius[0].transform;
-            }
+            //if (targetInViewRadius.Length > 0)
+            //{
+            //    Target = targetInViewRadius[0].transform;
+            //}
 
-            return target;
+            //return Target;
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, viewRadius);
+        //private void OnDrawGizmos()
+        //{
+        //    Gizmos.color = Color.red;
+        //    Gizmos.DrawWireSphere(transform.position, viewRadius);
 
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
-        }
+        //    Gizmos.color = Color.green;
+        //    Gizmos.DrawWireSphere(transform.position, attackRange);
+        //}
         #endregion Other Methods
 
     } 

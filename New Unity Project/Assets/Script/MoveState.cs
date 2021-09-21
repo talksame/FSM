@@ -25,7 +25,7 @@ namespace FastCampus.Characters
         // target 위치를 Enterㅇ[서 입력
         public override void OnEnter()
         {
-            agent?.SetDestination(context.target.position);
+            agent?.SetDestination(context.Target.position);
             animator?.SetBool(hashMove, true);
         }
 
@@ -34,7 +34,7 @@ namespace FastCampus.Characters
             Transform enemy = context.SearchEnemy();
             if (enemy)
             {
-                agent.SetDestination(context.target.position);
+                agent.SetDestination(context.Target.position);
 
                 if (agent.remainingDistance > agent.stoppingDistance)
                 {

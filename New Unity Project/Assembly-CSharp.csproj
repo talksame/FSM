@@ -70,6 +70,7 @@
     <Compile Include="Assets\Script\ControllerCharacter.cs" />
     <Compile Include="Assets\Script\StateMachine.cs" />
     <Compile Include="Assets\Script\FieldOfViewEditor.cs" />
+    <Compile Include="Assets\Script\PatrolScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -22,12 +22,23 @@ namespace FastCampus.Characters
 
 
         public Transform Target => fov.NeartestTarget;
+
+
+        // Patrol
+        public Transform[] waypoints;
+        [HideInInspector]
+        public Transform targetWaypoint = null;
+        private int waypointIndex = 0;
+
         #endregion Variables
 
         #region Unity Methods
         private void Start()
         {
-            stateMachine = new StateMachine<EnemyController>(this, new IdleState());
+            stateMachine = new StateMachine<EnemyController>(this, new PatrolScript());
+            IdleState idlestate = new IdleState();
+            idlestate.isPatrol = true;
+            stateMachine.AddState(new IdleState());
             stateMachine.AddState(new MoveState());
             stateMachine.AddState(new AttackState());
 
@@ -57,30 +68,31 @@ namespace FastCampus.Characters
         public Transform SearchEnemy()
         {
             return Target;
-            //Target = null;
-            //// 물리적인 구체형태에서 적이 있는가?
-            //Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
-
-
-            //if (targetInViewRadius.Length > 0)
-            //{
-            //    Target = targetInViewRadius[0].transform;
-            //}
-
-            //return Target;
         }
 
-        //private void OnDrawGizmos()
-        //{
-        //    Gizmos.color = Color.red;
-        //    Gizmos.DrawWireSphere(transform.position, viewRadius);
 
-        //    Gizmos.color = Color.green;
-        //    Gizmos.DrawWireSphere(transform.position, attackRange);
-        //}
+        public Transform FindNextWayPoint()
+        {
+            targetWaypoint = null;
+            //0보다 클 경우, 경로가 있을 경우에는 타겟을 변형하기.
+            if ( waypoints.Length > 0)
+            {
+                targetWaypoint = waypoints[waypointIndex];
+            }
+
+            waypointIndex = (waypointIndex + 1) % waypoints.Length;
+
+            return targetWaypoint;
+
+
+        }
         #endregion Other Methods
 
+
+
     } 
+
+
 }
 
 

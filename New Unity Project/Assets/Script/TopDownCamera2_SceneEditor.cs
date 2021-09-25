@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-namespace FastCampus.Cameras
+namespace FSM.Cameras
 {
     //어떤 카메라를 커스텀으로 할 지 지정해 주어야 한다.
     [CustomEditor(typeof(TopDownCamera2))]

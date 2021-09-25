@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace FastCampus.Characters
+namespace FSM.Characters
 {
     public class IdleState : State<EnemyController>
     {

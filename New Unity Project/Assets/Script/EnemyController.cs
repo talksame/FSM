@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace FastCampus.Characters
+namespace FSM.Characters
 { 
 
      public class EnemyController : MonoBehaviour

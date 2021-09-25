@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FastCampus.Cameras
+namespace FSM.Cameras
 {
     public class TopDownCamera2 : MonoBehaviour
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
-namespace FastCampus.Characters
+namespace FSM.Characters
 {
     [RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(CharacterController))]
     public class AgentControllerCharacter : MonoBehaviour
